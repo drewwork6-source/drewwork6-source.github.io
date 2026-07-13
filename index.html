@@ -121,7 +121,7 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
 .flow__step{margin-bottom:56px}
 .flow__step:last-child{margin-bottom:0}
 .flow__step--active .flow__track-dot{border-color:var(--color-highlight);color:#fff;background:var(--color-highlight)}
-.flow__balloon{position:absolute;left:32px;top:8px;width:76px;height:96px;transform:translate(-50%,-38%);transition:top .35s var(--ease-default);z-index:2;pointer-events:none;animation:balloon-bob 3.4s ease-in-out infinite}
+.flow__balloon{position:absolute;left:32px;top:8px;width:76px;height:96px;transform:translate(-50%,-38%);z-index:2;pointer-events:none;animation:balloon-bob 3.4s ease-in-out infinite}
 .flow__balloon-exit{width:100%;height:100%;transition:transform .2s linear,opacity .2s linear}
 .flow__balloon-exit svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 8px 12px rgba(5,4,25,.18))}
 @keyframes balloon-bob{0%,100%{transform:translate(-50%,-38%) rotate(-3deg)}50%{transform:translate(-50%,-38%) translateY(-6px) rotate(3deg)}}
@@ -137,7 +137,7 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
 /* ===== Work grid (sunset theme) ===== */
 .work{position:relative;overflow:hidden;width:100%;background:linear-gradient(180deg,#ffc487 0%,#ff9a5c 26%,#f0704c 52%,#c8504b 76%,#7d3646 100%)}
 .work__sky{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
-.work__sun{position:absolute;left:50%;top:9%;width:230px;height:230px;margin-left:-115px;transition:transform .2s linear,opacity .2s linear;will-change:transform,opacity}
+.work__sun{position:absolute;left:50%;top:9%;width:230px;height:230px;margin-left:-115px;will-change:transform,opacity}
 .work__sun-core{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 50% 45%,#ffd9a8 0%,#f3a35d 35%,#e2723f 66%,#c8562f 100%);filter:brightness(.8);box-shadow:0 0 90px 30px rgba(226,114,60,.32),0 0 200px 90px rgba(196,80,50,.16);animation:sun-pulse 6s ease-in-out infinite}
 @keyframes sun-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
 .work__hills{position:absolute;left:-5%;right:-5%;bottom:-6%;height:24%;background:linear-gradient(180deg,#7a2e3d,#47202f);border-radius:50% 50% 0 0/100% 100% 0 0;opacity:.85}
@@ -639,6 +639,21 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
   }
   window.addEventListener('scroll', updateHeader, { passive: true });
 
+  // Wraps a scroll-driven update function so it runs at most once per
+  // animation frame (synced to paint) instead of once per raw scroll
+  // event. Raw scroll events can fire in uneven bursts — especially
+  // during momentum scrolling on touch devices — which made anything
+  // driven directly off them (the balloon rail, the sinking sun) look
+  // stepped/rigid instead of gliding with the finger.
+  function onScrollFrame(fn){
+    var ticking = false;
+    return function(){
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){ fn(); ticking = false; });
+    };
+  }
+
   // FAQ accordion
   document.querySelectorAll('.faq-item').forEach(function(item){
     var q = item.querySelector('.faq-item__q');
@@ -725,7 +740,7 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
   if(panes.length){ panes[0].classList.add('is-active'); }
   if(steps.length){ steps[0].classList.add('flow__step--active'); }
 
-  window.addEventListener('scroll', updateFlow, { passive: true });
+  window.addEventListener('scroll', onScrollFrame(updateFlow), { passive: true });
   window.addEventListener('resize', updateFlow);
   updateFlow();
 
@@ -744,7 +759,7 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
     workSun.style.opacity = String(Math.max(1 - progress * 1.4, 0));
   }
 
-  window.addEventListener('scroll', updateWork, { passive: true });
+  window.addEventListener('scroll', onScrollFrame(updateWork), { passive: true });
   window.addEventListener('resize', updateWork);
   updateWork();
 
@@ -783,7 +798,7 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
     shootingStar.style.opacity = String(visible);
   }
 
-  window.addEventListener('scroll', updateStars, { passive: true });
+  window.addEventListener('scroll', onScrollFrame(updateStars), { passive: true });
   window.addEventListener('resize', updateStars);
   updateStars();
 })();
