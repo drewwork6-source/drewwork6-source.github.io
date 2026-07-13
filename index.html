@@ -133,8 +133,21 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
 .flow__pane-desc{font-size:var(--text-base);color:var(--color-text-muted);line-height:var(--leading-normal);max-width:520px}
 @media (max-width:820px){.flow{height:auto}.flow__wrapper{position:static;height:auto;padding:80px 24px}.flow__body-wrap{flex-direction:column;gap:var(--space-lg)}.flow__track{flex-direction:row;width:100%;gap:16px}.flow__track-bar,.flow__track-fill,.flow__balloon{display:none}.flow__track-dot{width:44px;height:44px}.flow__panel{min-height:0}.flow__pane{position:static;opacity:1;transform:none;pointer-events:auto;display:none}.flow__pane.is-active{display:block}}
 
-/* ===== Work grid ===== */
-.work{background:var(--color-bg);padding:var(--space-5xl) var(--space-xl);max-width:1400px;margin:0 auto}
+/* ===== Work grid (sunset theme) ===== */
+.work{position:relative;overflow:hidden;width:100%;background:linear-gradient(180deg,#ffc487 0%,#ff9a5c 26%,#f0704c 52%,#c8504b 76%,#7d3646 100%)}
+.work__sky{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.work__sun{position:absolute;left:50%;top:9%;width:230px;height:230px;margin-left:-115px;transition:transform .2s linear,opacity .2s linear;will-change:transform,opacity}
+.work__sun-core{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 50% 45%,#ffd9a8 0%,#f3a35d 35%,#e2723f 66%,#c8562f 100%);filter:brightness(.8);box-shadow:0 0 90px 30px rgba(226,114,60,.32),0 0 200px 90px rgba(196,80,50,.16);animation:sun-pulse 6s ease-in-out infinite}
+@keyframes sun-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+.work__hills{position:absolute;left:-5%;right:-5%;bottom:-6%;height:24%;background:linear-gradient(180deg,#7a2e3d,#47202f);border-radius:50% 50% 0 0/100% 100% 0 0;opacity:.85}
+.bird{position:absolute;width:26px;height:14px;opacity:.7;animation:bird-fly linear infinite}
+.bird__shape{width:100%;height:100%;display:block}
+.bird--1{top:20%;left:-40px;animation-duration:36s}
+.bird--2{top:30%;left:-40px;animation-duration:44s;animation-delay:-9s}
+.bird--3{top:14%;left:-40px;animation-duration:50s;animation-delay:-22s}
+@keyframes bird-fly{from{transform:translate(0,0)}50%{transform:translate(50vw,-16px)}to{transform:translate(calc(100vw + 80px),0)}}
+@media (max-width:820px){.work__sky{display:none}}
+.work__inner{position:relative;z-index:1;padding:var(--space-5xl) var(--space-xl);max-width:1400px;margin:0 auto}
 .work__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg);margin-top:var(--space-2xl)}
 .work-card{display:block;text-decoration:none;color:var(--color-text);border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;background:var(--color-bg);transition:transform .4s var(--ease-default),box-shadow .4s var(--ease-default)}
 .work-card:hover{transform:translateY(-6px);box-shadow:0 24px 48px -24px #05041933}
@@ -335,6 +348,14 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
 </section>
 
 <section class="work" id="work">
+  <div class="work__sky" aria-hidden="true" id="workSky">
+    <div class="work__sun" id="workSun"><div class="work__sun-core"></div></div>
+    <div class="work__hills"></div>
+    <div class="bird bird--1"><svg class="bird__shape" viewBox="0 0 24 12" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q6 0 12 10 Q18 0 24 10" fill="none" stroke="#5c2334" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <div class="bird bird--2"><svg class="bird__shape" viewBox="0 0 24 12" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q6 0 12 10 Q18 0 24 10" fill="none" stroke="#5c2334" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <div class="bird bird--3"><svg class="bird__shape" viewBox="0 0 24 12" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q6 0 12 10 Q18 0 24 10" fill="none" stroke="#5c2334" stroke-width="2" stroke-linecap="round"/></svg></div>
+  </div>
+  <div class="work__inner">
   <div class="reveal">
     <span class="section-eyebrow">Portfolio</span>
     <h2 class="section-title">My work</h2>
@@ -396,6 +417,7 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
       <div class="work-card__body"><div class="work-card__title">Leads Scraper</div><div class="work-card__desc">Finds home-service businesses with no website.</div></div>
     </a>
 
+  </div>
   </div>
 </section>
 
@@ -612,6 +634,25 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
   window.addEventListener('scroll', updateFlow, { passive: true });
   window.addEventListener('resize', updateFlow);
   updateFlow();
+
+  // "My work" sunset — sun sinks beneath the section as it scrolls by.
+  var work = document.querySelector('.work');
+  var workSun = document.getElementById('workSun');
+
+  function updateWork(){
+    if(!work || !workSun) return;
+    var rect = work.getBoundingClientRect();
+    var total = rect.height + window.innerHeight;
+    if(total <= 0) return;
+    var progress = Math.min(Math.max((window.innerHeight - rect.top) / total, 0), 1);
+    var fallY = progress * (window.innerHeight * 1.2);
+    workSun.style.transform = 'translateY(' + fallY + 'px)';
+    workSun.style.opacity = String(Math.max(1 - progress * 1.4, 0));
+  }
+
+  window.addEventListener('scroll', updateWork, { passive: true });
+  window.addEventListener('resize', updateWork);
+  updateWork();
 })();
 </script>
 
