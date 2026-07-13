@@ -52,7 +52,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .pill-btn--glass{background:#0504191a;backdrop-filter:blur(10px);color:var(--color-text)}
 
 /* ===== Header ===== */
-.header{position:fixed;top:0;left:0;width:100%;height:var(--header-height);z-index:9000;display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-xl)}
+.header{position:fixed;top:0;left:0;width:100%;height:var(--header-height);z-index:9000;display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-xl);transform:translateY(0);transition:transform .35s var(--ease-default)}
+.header--hidden{transform:translateY(-100%)}
 .header__logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:900;font-size:20px;letter-spacing:-.5px;color:var(--color-text)}
 .header__logo-mark{width:28px;height:28px;border-radius:8px;background:var(--color-highlight);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:900}
 .header__nav{display:flex;align-items:center;gap:var(--space-xl)}
@@ -496,6 +497,22 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
   window.addEventListener('resize', onScrollOrResize);
   revealInView();
   setInterval(revealInView, 500);
+
+  // Hide header on scroll down, show on scroll up
+  var header = document.querySelector('.header');
+  var lastScrollY = window.scrollY;
+  function updateHeader(){
+    var y = window.scrollY;
+    if(header){
+      if(y > lastScrollY && y > 120){
+        header.classList.add('header--hidden');
+      } else if(y < lastScrollY || y <= 120){
+        header.classList.remove('header--hidden');
+      }
+    }
+    lastScrollY = y;
+  }
+  window.addEventListener('scroll', updateHeader, { passive: true });
 
   // FAQ accordion
   document.querySelectorAll('.faq-item').forEach(function(item){
