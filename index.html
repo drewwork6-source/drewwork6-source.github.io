@@ -125,13 +125,14 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
 .flow__balloon-exit{width:100%;height:100%;transition:transform .2s linear,opacity .2s linear}
 .flow__balloon-exit svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 8px 12px rgba(5,4,25,.18))}
 @keyframes balloon-bob{0%,100%{transform:translate(-50%,-38%) rotate(-3deg)}50%{transform:translate(-50%,-38%) translateY(-6px) rotate(3deg)}}
+@keyframes balloon-bob-mobile{0%,100%{transform:rotate(-3deg)}50%{transform:translateY(-8px) rotate(3deg)}}
 .flow__panel{flex:1;min-height:280px;position:relative}
 .flow__pane{position:absolute;inset:0;opacity:0;transform:translateY(24px);transition:opacity .5s var(--ease-default),transform .5s var(--ease-default);pointer-events:none}
 .flow__pane.is-active{opacity:1;transform:translateY(0);pointer-events:auto}
 .flow__pane-number{font-size:var(--text-sm);color:var(--color-highlight);letter-spacing:var(--tracking-wide);text-transform:uppercase;margin-bottom:var(--space-sm);display:block}
 .flow__pane-title{font-weight:500;font-size:40px;letter-spacing:var(--tracking-tight);margin-bottom:var(--space-md)}
 .flow__pane-desc{font-size:var(--text-base);color:var(--color-text-muted);line-height:var(--leading-normal);max-width:520px}
-@media (max-width:820px){.flow{height:auto}.flow__wrapper{position:static;height:auto;padding:80px 24px}.flow__body-wrap{flex-direction:column;gap:var(--space-lg)}.flow__track{display:none}.flow__panel{min-height:0}.flow__pane{position:static;opacity:1;transform:none;pointer-events:auto;display:block;padding-bottom:var(--space-lg);margin-bottom:var(--space-lg);border-bottom:1px solid var(--color-border)}.flow__pane:last-child{padding-bottom:0;margin-bottom:0;border-bottom:none}.flow__pane-title{font-size:28px}}
+@media (max-width:820px){.flow{height:auto}.flow__wrapper{position:static;height:auto;padding:80px 24px}.flow__body-wrap{flex-direction:column;gap:var(--space-lg);position:relative}.flow__track{position:absolute;top:0;right:0;bottom:0;width:56px;display:block}.flow__track-bar,.flow__track-fill,.flow__step{display:none}.flow__balloon{left:auto;right:0;top:0;transform:none;width:56px;height:70px;animation:balloon-bob-mobile 3.4s ease-in-out infinite}.flow__panel{min-height:0;padding-right:56px}.flow__pane{position:static;opacity:1;transform:none;pointer-events:auto;display:block;padding-bottom:var(--space-lg);margin-bottom:var(--space-lg);border-bottom:1px solid var(--color-border)}.flow__pane:last-child{padding-bottom:0;margin-bottom:0;border-bottom:none}.flow__pane-title{font-size:28px}}
 
 /* ===== Work grid (sunset theme) ===== */
 .work{position:relative;overflow:hidden;width:100%;background:linear-gradient(180deg,#ffc487 0%,#ff9a5c 26%,#f0704c 52%,#c8504b 76%,#7d3646 100%)}
@@ -148,8 +149,13 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
 @keyframes bird-fly{from{transform:translate(0,0)}50%{transform:translate(50vw,-16px)}to{transform:translate(calc(100vw + 80px),0)}}
 @media (max-width:820px){.work__sky{display:none}}
 .work__inner{position:relative;z-index:1;padding:var(--space-5xl) var(--space-xl);max-width:1400px;margin:0 auto}
+.work__filters{display:flex;gap:10px;flex-wrap:wrap;margin-top:var(--space-lg)}
+.work__filter{height:36px;padding:0 18px;border-radius:var(--radius-full);border:1px solid #ffffff45;background:#ffffff1a;color:#fff;font-size:12px;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease-default),border-color .3s var(--ease-default),color .3s var(--ease-default)}
+.work__filter:hover{background:#ffffff30}
+.work__filter.is-active{background:#fff;color:#7d3646;border-color:#fff}
 .work__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg);margin-top:var(--space-2xl)}
-.work-card{display:block;text-decoration:none;color:var(--color-text);border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;background:var(--color-bg);transition:transform .4s var(--ease-default),box-shadow .4s var(--ease-default)}
+.work-card{display:block;text-decoration:none;color:var(--color-text);border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;background:var(--color-bg);transition:transform .4s var(--ease-default),box-shadow .4s var(--ease-default),opacity .3s ease}
+.work-card.is-hidden{display:none}
 .work-card:hover{transform:translateY(-6px);box-shadow:0 24px 48px -24px #05041933}
 .work-card__head{height:120px;display:flex;align-items:center;justify-content:space-between;padding:var(--space-lg);color:#fff}
 .work-card__badge{font-size:var(--text-xs);letter-spacing:var(--tracking-wide);text-transform:uppercase;background:#ffffff26;padding:4px 10px;border-radius:var(--radius-full)}
@@ -172,8 +178,9 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
 .grad-13{background:linear-gradient(135deg,#0e7490,#22d3ee)}
 .grad-14{background:linear-gradient(135deg,#3f6212,#ca8a04)}
 @media (max-width:1024px){.work__grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:640px){.work__grid{grid-template-columns:1fr}}
 @media (max-width:820px){.work__inner{padding:80px 24px}}
+@media (max-width:640px){.work__grid{grid-template-columns:repeat(2,1fr);gap:12px}.work-card__head{height:84px;padding:14px}.work-card__badge{font-size:10px;padding:3px 8px}.work-card__arrow{font-size:14px}.work-card__body{padding:14px}.work-card__title{font-size:15px;line-height:1.2;margin-bottom:4px}.work-card__desc{font-size:12px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}}
+@media (max-width:360px){.work__grid{grid-template-columns:1fr}}
 
 /* ===== Standards (maze callout) ===== */
 .standards{position:relative;overflow:hidden;padding:var(--space-5xl) var(--space-xl);background:linear-gradient(180deg,#070a22 0%,#0e1440 45%,#1a2158 100%)}
@@ -390,75 +397,82 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
   <div class="reveal">
     <span class="section-eyebrow">Portfolio</span>
     <h2 class="section-title">My work</h2>
+    <div class="work__filters" role="tablist" aria-label="Filter work by category">
+      <button type="button" class="work__filter is-active" data-filter="all">All</button>
+      <button type="button" class="work__filter" data-filter="sites">Client Sites</button>
+      <button type="button" class="work__filter" data-filter="tools">Tools</button>
+      <button type="button" class="work__filter" data-filter="showcases">Showcases</button>
+      <button type="button" class="work__filter" data-filter="apps">Apps</button>
+    </div>
   </div>
   <div class="work__grid">
 
-    <a href="https://drewwork6-source.github.io/chorenextdoor-website/" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://drewwork6-source.github.io/chorenextdoor-website/" target="_blank" rel="noopener" class="work-card reveal" data-category="sites">
       <div class="work-card__head grad-2"><span class="work-card__badge">Active Demo</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">ChoreNextDoor — Website</div><div class="work-card__desc">Marketing site + interactive demo for the chore marketplace.</div></div>
     </a>
 
-    <a href="https://github.com/drewwork6-source/voice-bot" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://github.com/drewwork6-source/voice-bot" target="_blank" rel="noopener" class="work-card reveal" data-category="tools">
       <div class="work-card__head grad-9"><span class="work-card__badge">Tool</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">Voice Bot</div><div class="work-card__desc">AI agent that phone-tests medical office AI receptionists.</div></div>
     </a>
 
-    <a href="https://github.com/drewwork6-source/leads-scraper" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://github.com/drewwork6-source/leads-scraper" target="_blank" rel="noopener" class="work-card reveal" data-category="tools">
       <div class="work-card__head grad-3"><span class="work-card__badge">Tool</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">Leads Scraper</div><div class="work-card__desc">Finds home-service businesses with no website.</div></div>
     </a>
 
-    <a href="https://drewwork6-source.github.io/turf-factory-mockups/" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://drewwork6-source.github.io/turf-factory-mockups/" target="_blank" rel="noopener" class="work-card reveal" data-category="sites">
       <div class="work-card__head grad-5"><span class="work-card__badge">Client Site</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">The Turf Factory</div><div class="work-card__desc">Three design directions for an artificial turf installer.</div></div>
     </a>
 
-    <a href="https://readdy.cc/preview/4825218d-b6d3-48fc-b77e-701ecb0cd170/10599703/" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://readdy.cc/preview/4825218d-b6d3-48fc-b77e-701ecb0cd170/10599703/" target="_blank" rel="noopener" class="work-card reveal" data-category="sites">
       <div class="work-card__head grad-11"><span class="work-card__badge">Client Site</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">Capital Group</div><div class="work-card__desc">Real estate investment &amp; fast cash home buying site.</div></div>
     </a>
 
-    <a href="https://readdy.cc/preview/4dfa5af5-1b9b-48ba-a8b9-ae6956d71713/10872674/" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://readdy.cc/preview/4dfa5af5-1b9b-48ba-a8b9-ae6956d71713/10872674/" target="_blank" rel="noopener" class="work-card reveal" data-category="sites">
       <div class="work-card__head grad-1"><span class="work-card__badge">Client Site</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">F&amp;N Waste Removal</div><div class="work-card__desc">Junk removal business site — Palm Beach County, FL.</div></div>
     </a>
 
-    <a href="https://readdy.cc/preview/bb6ea16c-bc31-4ad8-8624-03aec4baff91/10557643/" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://readdy.cc/preview/bb6ea16c-bc31-4ad8-8624-03aec4baff91/10557643/" target="_blank" rel="noopener" class="work-card reveal" data-category="sites">
       <div class="work-card__head grad-10"><span class="work-card__badge">Client Site</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">Billings Yacht Management</div><div class="work-card__desc">Premium yacht detailing &amp; management site.</div></div>
     </a>
 
-    <a href="https://drewwork6-source.github.io/apex-hvac-demo/" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://drewwork6-source.github.io/apex-hvac-demo/" target="_blank" rel="noopener" class="work-card reveal" data-category="showcases">
       <div class="work-card__head grad-6"><span class="work-card__badge">Showcase</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">Apex HVAC &amp; Plumbing</div><div class="work-card__desc">Home-service industry showcase — navy &amp; amber, custom SVG art.</div></div>
     </a>
 
-    <a href="https://drewwork6-source.github.io/harbor-table-restaurant-demo/" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://drewwork6-source.github.io/harbor-table-restaurant-demo/" target="_blank" rel="noopener" class="work-card reveal" data-category="showcases">
       <div class="work-card__head grad-7"><span class="work-card__badge">Showcase</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">Harbor Table</div><div class="work-card__desc">Upscale restaurant showcase — editorial, burgundy &amp; brass.</div></div>
     </a>
 
-    <a href="https://drewwork6-source.github.io/fade-barbershop-demo/" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://drewwork6-source.github.io/fade-barbershop-demo/" target="_blank" rel="noopener" class="work-card reveal" data-category="showcases">
       <div class="work-card__head grad-8"><span class="work-card__badge">Showcase</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">Fade Co. Barbershop</div><div class="work-card__desc">Bold, dark-mode barbershop showcase.</div></div>
     </a>
 
-    <a href="https://github.com/drewwork6-source/ChoreNextDoor-app" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://github.com/drewwork6-source/ChoreNextDoor-app" target="_blank" rel="noopener" class="work-card reveal" data-category="apps">
       <div class="work-card__head grad-4"><span class="work-card__badge">App</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">ChoreNextDoor</div><div class="work-card__desc">Neighborhood chore marketplace — Expo mobile app.</div></div>
     </a>
 
-    <a href="https://readdy.cc/preview/26040cee-3291-4a34-a85a-313df2fdf5c9/7790317/" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://readdy.cc/preview/26040cee-3291-4a34-a85a-313df2fdf5c9/7790317/" target="_blank" rel="noopener" class="work-card reveal" data-category="sites">
       <div class="work-card__head grad-12"><span class="work-card__badge">Client Site</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">GreenScape Pro</div><div class="work-card__desc">Landscaping &amp; garden design site for a Portland-based crew.</div></div>
     </a>
 
-    <a href="https://readdy.cc/preview/1439d045-6a90-4883-baf1-b77604d32ad0/9357562/" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://readdy.cc/preview/1439d045-6a90-4883-baf1-b77604d32ad0/9357562/" target="_blank" rel="noopener" class="work-card reveal" data-category="sites">
       <div class="work-card__head grad-13"><span class="work-card__badge">Client Site</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">Gala's Pool Service</div><div class="work-card__desc">Residential pool cleaning &amp; maintenance — Fort Myers Beach, FL.</div></div>
     </a>
 
-    <a href="https://readdy.cc/preview/20a74a97-6099-4a98-a58a-de2882aaa570/7678996/" target="_blank" rel="noopener" class="work-card reveal">
+    <a href="https://readdy.cc/preview/20a74a97-6099-4a98-a58a-de2882aaa570/7678996/" target="_blank" rel="noopener" class="work-card reveal" data-category="sites">
       <div class="work-card__head grad-14"><span class="work-card__badge">Client Site</span><span class="work-card__arrow">↗</span></div>
       <div class="work-card__body"><div class="work-card__title">Lee County Landscaping</div><div class="work-card__desc">Custom landscape design &amp; install — greater Lee County, FL.</div></div>
     </a>
@@ -650,10 +664,27 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
   var balloon = document.getElementById('flowBalloon');
   var balloonExit = document.getElementById('flowBalloonExit');
   var sky = document.getElementById('flowSky');
+  var flowTrack = document.querySelector('.flow__track');
+  var mobileFlowQuery = window.matchMedia('(max-width:820px)');
   var trackBarHeight = 0;
 
   function updateFlow(){
     if(!flow) return;
+
+    // Mobile: the section isn't pinned/tall, so there's no scroll-pin
+    // progress to drive step-switching. Instead, float the balloon down
+    // a side rail spanning the section's natural height as it scrolls by.
+    if(mobileFlowQuery.matches){
+      if(balloon && flowTrack){
+        var frect = flow.getBoundingClientRect();
+        var ftotal = frect.height + window.innerHeight;
+        var fprogress = ftotal > 0 ? Math.min(Math.max((window.innerHeight - frect.top) / ftotal, 0), 1) : 0;
+        var railRange = Math.max(flowTrack.offsetHeight - balloon.offsetHeight, 0);
+        balloon.style.top = (fprogress * railRange) + 'px';
+      }
+      return;
+    }
+
     var rect = flow.getBoundingClientRect();
     var total = rect.height - window.innerHeight;
     if(total <= 0) return;
@@ -716,6 +747,21 @@ html:not(.preload) .hero__title{opacity:1;transform:perspective(1000px) translat
   window.addEventListener('scroll', updateWork, { passive: true });
   window.addEventListener('resize', updateWork);
   updateWork();
+
+  // "My work" category filters — lets visitors narrow the grid down
+  // instead of scrolling past everything every time.
+  var workFilters = document.querySelectorAll('.work__filter');
+  var workCards = document.querySelectorAll('.work-card');
+  workFilters.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var filter = btn.getAttribute('data-filter');
+      workFilters.forEach(function(b){ b.classList.toggle('is-active', b === btn); });
+      workCards.forEach(function(card){
+        var match = filter === 'all' || card.getAttribute('data-category') === filter;
+        card.classList.toggle('is-hidden', !match);
+      });
+    });
+  });
 
   // Night sky ("Or Take the Long Way") — a shooting star dashes across
   // the section as you scroll through it.
