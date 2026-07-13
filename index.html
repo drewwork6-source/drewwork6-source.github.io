@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Drew Seidel — AI Engineer & Web Developer</title>
+<meta name="description" content="Drew Seidel — AI engineer, web developer, and entrepreneur. Freelance websites, AI automation, and apps that solve real problems." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: "#1f2937",
+          inksoft: "#475569",
+          blue: "#2b6cb0",
+          bluesoft: "#5b8fc9",
+          cream: "#eef2f7",
+        },
+        fontFamily: {
+          serif: ["Fraunces", "serif"],
+          sans: ["Inter", "system-ui", "sans-serif"],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .font-serif { font-family: 'Fraunces', serif; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal.d1 { transition-delay: .08s; }
+  .reveal.d2 { transition-delay: .16s; }
+  .reveal.d3 { transition-delay: .24s; }
+  .reveal.d4 { transition-delay: .32s; }
+
+  .card-hover { transition: transform .25s ease, box-shadow .25s ease; }
+  .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -16px rgba(31,41,55,0.18); }
+
+  .btn-lift { transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+  .btn-lift:hover { transform: translateY(-2px); }
+
+  .maze-card {
+    background:
+      radial-gradient(circle at 20% 20%, rgba(43,108,176,0.35), transparent 55%),
+      radial-gradient(circle at 80% 80%, rgba(167,139,250,0.30), transparent 55%),
+      linear-gradient(135deg, #111827, #1f2937 60%, #111827);
+  }
+
+  .grad-1 { background: linear-gradient(135deg, #1B4332, #52B788); }
+  .grad-2 { background: linear-gradient(135deg, #0B1F3A, #F59E0B); }
+  .grad-3 { background: linear-gradient(135deg, #6E2438, #B8925A); }
+  .grad-4 { background: linear-gradient(135deg, #0a0a0a, #e9ff2e); }
+  .grad-5 { background: linear-gradient(135deg, #0f172a, #38bdf8); }
+  .grad-6 { background: linear-gradient(135deg, #1e3a5f, #0ea5e9); }
+  .grad-7 { background: linear-gradient(135deg, #2b6cb0, #a78bfa); }
+  .grad-8 { background: linear-gradient(135deg, #164e63, #22d3ee); }
+  .grad-9 { background: linear-gradient(135deg, #7c2d12, #fb923c); }
+  .grad-10 { background: linear-gradient(135deg, #14532d, #4ade80); }
+  .grad-11 { background: linear-gradient(135deg, #312e81, #818cf8); }
+
+  .skill-chip {
+    display:flex; align-items:center; gap:8px; font-size:13px; font-weight:500;
+    background: rgba(43,108,176,.06); border: 1px solid rgba(43,108,176,.15);
+    padding: 9px 12px; border-radius: 12px; color: #1f2937;
+  }
+  .skill-chip .dot { width:6px; height:6px; border-radius:50%; background:#2b6cb0; flex:none; }
+</style>
+</head>
+<body class="bg-white text-ink antialiased">
+
+  <!-- ─── NAV ─────────────────────────────────────────────────────────── -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#top" class="font-serif font-semibold text-lg tracking-tight">Drew <span class="text-blue">Seidel</span></a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-inksoft">
+        <a href="#work" class="hover:text-blue transition-colors">My Work</a>
+        <a href="#maze" class="hover:text-blue transition-colors">The Experience</a>
+        <a href="#skills" class="hover:text-blue transition-colors">Skills</a>
+        <a href="#contact" class="hover:text-blue transition-colors">Contact</a>
+      </nav>
+      <a href="assets/Drew-Seidel-Resume.pdf" target="_blank" rel="noopener"
+         class="btn-lift bg-ink hover:bg-blue text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-sm">
+        Resume ↗
+      </a>
+    </div>
+  </header>
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────────── -->
+  <section id="top" class="pt-40 pb-24 bg-cream">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <div class="inline-flex items-center gap-2 bg-white border border-gray-200 text-xs font-semibold px-4 py-1.5 rounded-full mb-7 text-inksoft">
+        <span class="w-2 h-2 bg-blue rounded-full animate-pulse"></span>
+        AI Engineer · Web Developer · Entrepreneur
+      </div>
+      <h1 class="font-serif font-semibold text-5xl md:text-6xl leading-tight mb-6">
+        I build websites and<br class="hidden md:block"/> AI tools that solve real problems.
+      </h1>
+      <p class="text-lg text-inksoft leading-relaxed max-w-2xl mx-auto mb-10">
+        Founder &amp; web developer running a freelance business from the ground up — finding clients, closing deals,
+        and shipping sites and automation that businesses actually use. Student athlete at FGCU, comfortable
+        across the full stack.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <a href="#work" class="btn-lift bg-blue hover:bg-bluesoft text-white font-semibold px-7 py-3.5 rounded-full text-base shadow-lg shadow-blue/20">
+          View My Work
+        </a>
+        <a href="https://drewwork6-source.github.io/labyrinth-portfolio/" target="_blank" rel="noopener"
+           class="btn-lift bg-white border border-gray-200 hover:border-blue text-ink font-semibold px-7 py-3.5 rounded-full text-base">
+          Walk the Maze ↗
+        </a>
+        <a href="assets/Drew-Seidel-Resume.pdf" target="_blank" rel="noopener"
+           class="btn-lift bg-transparent text-inksoft hover:text-blue font-semibold px-7 py-3.5 rounded-full text-base">
+          Download Resume ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── THE MAZE / EXPERIENCE CALLOUT ──────────────────────────────────── -->
+  <section id="maze" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal maze-card rounded-3xl p-10 md:p-14 text-white overflow-hidden relative card-hover">
+        <div class="relative z-10 max-w-xl">
+          <div class="text-xs font-semibold uppercase tracking-widest text-blue-200 mb-4">An optional detour</div>
+          <h2 class="font-serif font-semibold text-3xl md:text-4xl mb-4 leading-tight">Prefer to explore instead of scroll?</h2>
+          <p class="text-white/70 leading-relaxed mb-8">
+            I built an interactive, scroll-driven 3D walk through a maze — about me, my projects, and my skills,
+            told as a first-person story instead of a static page. Three.js, no build step, just scroll.
+          </p>
+          <a href="https://drewwork6-source.github.io/labyrinth-portfolio/" target="_blank" rel="noopener"
+             class="btn-lift inline-flex items-center gap-2 bg-white text-ink font-semibold px-7 py-3.5 rounded-full text-base shadow-lg">
+            Enter the Maze ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MY WORK ─────────────────────────────────────────────────────── -->
+  <section id="work" class="py-20 bg-cream">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal mb-14 text-center">
+        <p class="text-blue font-semibold text-sm uppercase tracking-widest mb-3">Selected work</p>
+        <h2 class="font-serif font-semibold text-4xl md:text-5xl">Things I've built</h2>
+      </div>
+
+      <p class="reveal text-inksoft text-sm font-semibold uppercase tracking-widest mb-5">Client &amp; Showcase Websites</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+
+        <a href="https://drewwork6-source.github.io/fnwaste-website/" target="_blank" rel="noopener"
+           class="reveal card-hover bg-white rounded-2xl overflow-hidden border border-gray-100">
+          <div class="grad-1 h-28"></div>
+          <div class="p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider text-forest bg-green-50 text-green-700 px-2.5 py-1 rounded-full">Live Site</span>
+            <h3 class="font-bold text-base mt-3 mb-1">F&amp;N Waste Removal</h3>
+            <p class="text-sm text-inksoft leading-snug">Junk removal business site — Palm Beach County, FL.</p>
+          </div>
+        </a>
+
+        <a href="https://readdy.cc/preview/bb6ea16c-bc31-4ad8-8624-03aec4baff91/10557643/" target="_blank" rel="noopener"
+           class="reveal d1 card-hover bg-white rounded-2xl overflow-hidden border border-gray-100">
+          <div class="grad-5 h-28"></div>
+          <div class="p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full">Live Site</span>
+            <h3 class="font-bold text-base mt-3 mb-1">Billings Yacht Management</h3>
+            <p class="text-sm text-inksoft leading-snug">Premium yacht detailing &amp; management site.</p>
+          </div>
+        </a>
+
+        <a href="https://readdy.cc/preview/4825218d-b6d3-48fc-b77e-701ecb0cd170/10599703/" target="_blank" rel="noopener"
+           class="reveal d2 card-hover bg-white rounded-2xl overflow-hidden border border-gray-100">
+          <div class="grad-6 h-28"></div>
+          <div class="p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full">Live Site</span>
+            <h3 class="font-bold text-base mt-3 mb-1">Rich Capital Group</h3>
+            <p class="text-sm text-inksoft leading-snug">Real estate investment &amp; fast cash home buying site.</p>
+          </div>
+        </a>
+
+        <a href="https://drewwork6-source.github.io/chorenextdoor-website/" target="_blank" rel="noopener"
+           class="reveal d3 card-hover bg-white rounded-2xl overflow-hidden border border-gray-100">
+          <div class="grad-7 h-28"></div>
+          <div class="p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full">Live Site</span>
+            <h3 class="font-bold text-base mt-3 mb-1">ChoreNextDoor — Website</h3>
+            <p class="text-sm text-inksoft leading-snug">Marketing site + interactive demo for the chore marketplace.</p>
+          </div>
+        </a>
+
+        <a href="https://drewwork6-source.github.io/turf-factory-mockups/" target="_blank" rel="noopener"
+           class="reveal d4 card-hover bg-white rounded-2xl overflow-hidden border border-gray-100">
+          <div class="grad-10 h-28"></div>
+          <div class="p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full">Mockups</span>
+            <h3 class="font-bold text-base mt-3 mb-1">The Turf Factory</h3>
+            <p class="text-sm text-inksoft leading-snug">Three design directions for an artificial turf installer.</p>
+          </div>
+        </a>
+
+        <a href="https://drewwork6-source.github.io/apex-hvac-demo/" target="_blank" rel="noopener"
+           class="reveal card-hover bg-white rounded-2xl overflow-hidden border border-gray-100">
+          <div class="grad-2 h-28"></div>
+          <div class="p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full">Showcase Demo</span>
+            <h3 class="font-bold text-base mt-3 mb-1">Apex HVAC &amp; Plumbing</h3>
+            <p class="text-sm text-inksoft leading-snug">Home-service industry showcase — navy &amp; amber, custom SVG art.</p>
+          </div>
+        </a>
+
+        <a href="https://drewwork6-source.github.io/harbor-table-restaurant-demo/" target="_blank" rel="noopener"
+           class="reveal d1 card-hover bg-white rounded-2xl overflow-hidden border border-gray-100">
+          <div class="grad-3 h-28"></div>
+          <div class="p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full">Showcase Demo</span>
+            <h3 class="font-bold text-base mt-3 mb-1">Harbor Table</h3>
+            <p class="text-sm text-inksoft leading-snug">Upscale restaurant showcase — editorial, burgundy &amp; brass.</p>
+          </div>
+        </a>
+
+        <a href="https://drewwork6-source.github.io/fade-barbershop-demo/" target="_blank" rel="noopener"
+           class="reveal d2 card-hover bg-white rounded-2xl overflow-hidden border border-gray-100">
+          <div class="grad-4 h-28"></div>
+          <div class="p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full">Showcase Demo</span>
+            <h3 class="font-bold text-base mt-3 mb-1">Fade Co. Barbershop</h3>
+            <p class="text-sm text-inksoft leading-snug">Bold, dark-mode barbershop showcase.</p>
+          </div>
+        </a>
+
+        <!-- ADD NEW WEBSITE PROJECT CARDS ABOVE THIS LINE.
+             Copy one of the <a class="reveal card-hover ..."> blocks above,
+             give it a new href, pick any .grad-1 through .grad-11 class for
+             the color header, and update the badge/title/description. -->
+
+      </div>
+
+      <p class="reveal text-inksoft text-sm font-semibold uppercase tracking-widest mb-5">Apps &amp; Tools</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <a href="https://github.com/drewwork6-source/ChoreNextDoor-app" target="_blank" rel="noopener"
+           class="reveal card-hover bg-white rounded-2xl overflow-hidden border border-gray-100">
+          <div class="grad-11 h-28"></div>
+          <div class="p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider bg-purple-50 text-purple-700 px-2.5 py-1 rounded-full">App Demo</span>
+            <h3 class="font-bold text-base mt-3 mb-1">ChoreNextDoor</h3>
+            <p class="text-sm text-inksoft leading-snug">Neighborhood chore marketplace — Expo mobile app.</p>
+          </div>
+        </a>
+
+        <a href="https://github.com/drewwork6-source/voice-bot" target="_blank" rel="noopener"
+           class="reveal d1 card-hover bg-white rounded-2xl overflow-hidden border border-gray-100">
+          <div class="grad-8 h-28"></div>
+          <div class="p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider bg-purple-50 text-purple-700 px-2.5 py-1 rounded-full">GitHub Repo</span>
+            <h3 class="font-bold text-base mt-3 mb-1">Voice Bot</h3>
+            <p class="text-sm text-inksoft leading-snug">AI agent that phone-tests medical office AI receptionists.</p>
+          </div>
+        </a>
+
+        <a href="https://github.com/drewwork6-source/leads-scraper" target="_blank" rel="noopener"
+           class="reveal d2 card-hover bg-white rounded-2xl overflow-hidden border border-gray-100">
+          <div class="grad-9 h-28"></div>
+          <div class="p-5">
+            <span class="text-[11px] font-semibold uppercase tracking-wider bg-purple-50 text-purple-700 px-2.5 py-1 rounded-full">GitHub Repo</span>
+            <h3 class="font-bold text-base mt-3 mb-1">Leads Scraper</h3>
+            <p class="text-sm text-inksoft leading-snug">Finds home-service businesses with no website.</p>
+          </div>
+        </a>
+
+        <!-- ADD NEW APP/TOOL PROJECT CARDS ABOVE THIS LINE. -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SKILLS ───────────────────────────────────────────────────────── -->
+  <section id="skills" class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="reveal mb-10 text-center">
+        <p class="text-blue font-semibold text-sm uppercase tracking-widest mb-3">What's in the toolkit</p>
+        <h2 class="font-serif font-semibold text-4xl">Tools &amp; Stack</h2>
+      </div>
+      <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="skill-chip"><span class="dot"></span>Anthropic Claude API</div>
+        <div class="skill-chip"><span class="dot"></span>React / Next.js</div>
+        <div class="skill-chip"><span class="dot"></span>React Native / Expo</div>
+        <div class="skill-chip"><span class="dot"></span>Node.js</div>
+        <div class="skill-chip"><span class="dot"></span>Twilio Voice + Streams</div>
+        <div class="skill-chip"><span class="dot"></span>Deepgram STT</div>
+        <div class="skill-chip"><span class="dot"></span>ElevenLabs TTS</div>
+        <div class="skill-chip"><span class="dot"></span>FastAPI / Python</div>
+        <div class="skill-chip"><span class="dot"></span>Playwright + Crawlee</div>
+        <div class="skill-chip"><span class="dot"></span>Three.js / WebGL</div>
+        <div class="skill-chip"><span class="dot"></span>Tailwind CSS</div>
+        <div class="skill-chip"><span class="dot"></span>WordPress / Webflow</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT / FOOTER ────────────────────────────────────────────── -->
+  <section id="contact" class="py-24 bg-ink">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <p class="reveal text-blue-300 font-semibold text-sm uppercase tracking-widest mb-4">Let's build something</p>
+      <h2 class="reveal font-serif font-semibold text-4xl md:text-5xl text-white mb-6">Get in touch.</h2>
+      <p class="reveal text-white/60 text-lg mb-10">If any of this was interesting, I'd like to hear from you.</p>
+      <div class="reveal flex flex-wrap items-center justify-center gap-3">
+        <a href="mailto:drew.work6@outlook.com" class="btn-lift bg-white text-ink font-semibold px-7 py-3.5 rounded-full text-base">Email me</a>
+        <a href="tel:+18475074013" class="btn-lift bg-white/10 border border-white/20 text-white font-semibold px-7 py-3.5 rounded-full text-base">847-507-4013</a>
+        <a href="https://github.com/drewwork6-source" target="_blank" rel="noopener" class="btn-lift bg-white/10 border border-white/20 text-white font-semibold px-7 py-3.5 rounded-full text-base">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 mt-16 pt-8 border-t border-white/10">
+      <p class="text-white/30 text-xs text-center">© 2026 Drew Seidel · Fort Myers, FL</p>
+    </div>
+  </section>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach((el) => observer.observe(el));
+</script>
+
+</body>
+</html>
